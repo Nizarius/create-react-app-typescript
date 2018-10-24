@@ -174,6 +174,18 @@ module.exports = {
             test: /\.(ts|tsx)$/,
             include: paths.appSrc,
             use: [
+              // require to use custom babel plugins with react-app-rewired
+              {
+                loader: require.resolve('babel-loader'),
+                options: {
+                  // @remove-on-eject-begin
+                  babelrc: false,
+                  presets: [require.resolve('babel-preset-react-app')],
+                  // @remove-on-eject-end
+                  compact: true,
+                  plugins: []
+                },
+              },
               {
                 loader: require.resolve('ts-loader'),
                 options: {
